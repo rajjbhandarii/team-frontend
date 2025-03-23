@@ -1,0 +1,69 @@
+<div *ngIf="!isjoinCollab && !isMakeCollab">
+    <div class="container">
+        <div class="setup-guide">
+            <h1>Welcome to Screen Sharing</h1>
+            <p>Choose whether you want to host or join a screen sharing session</p>
+        </div>
+
+        <div class="collab-actions">
+            <button class="collab-button join-collab" (click)="joinCollab()">Join a Session</button>
+            <button class="collab-button make-collab" (click)="makeCollab()">Host a Session</button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isMakeCollab">
+    <div class="host-container">
+        <div class="host-card">
+            <h1 class="host-title">Host a Session</h1>
+
+            <form class="host-form" (ngSubmit)="createRoom()">
+                <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+                <div class="form-group">
+                    <input type="text" class="form-input" placeholder="Enter Room ID" [(ngModel)]="roomId" name="roomId"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" class="form-input" placeholder="Enter Password" [(ngModel)]="password"
+                        name="password" required>
+                </div>
+
+                <button type="submit" class="submit-button" [disabled]="isLoading">
+                    <span *ngIf="isLoading" class="loading-spinner"></span>
+                    Create Room
+                </button>
+                <button type="button" class="cancel-button" (click)="cancel()">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isjoinCollab">
+    <div class="member-container">
+        <div class="host-card">
+            <h1 class="host-title">Join a Session</h1>
+
+            <form class="host-form" (ngSubmit)="joinRoom()">
+                <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+                <div class="form-group">
+                    <input type="text" class="form-input" placeholder="Enter Room ID" [(ngModel)]="roomId" name="roomId"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" class="form-input" placeholder="Enter Password" [(ngModel)]="password"
+                        name="password" required>
+                </div>
+
+                <button type="submit" class="submit-button" [disabled]="isLoading">
+                    <span *ngIf="isLoading" class="loading-spinner"></span>
+                    Join Room
+                </button>
+                <button type="button" class="cancel-button" (click)="cancel()">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>
